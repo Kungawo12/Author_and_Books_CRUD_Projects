@@ -2,23 +2,23 @@
 {%block body%}
 <div class="container">
     <div class="m-3 d-flex justify-content-between">
-    <div class="card ms-3 p-5 w-50 text-light bg-dark">
-        <h1 class="card-title">New Books</h1>
+    <div class="card ms-3 p-5 w-50 h-50 text-light bg-dark">
+        <h1 class="card-title text-warning">New Books</h1>
         <form action="/books/add_books" method="post">
             <label for="title" name="title">Title:</label>
             <input type="text" class="mb-3 form-control" name="title" id="title">
             <label for="num_of_pages" name="num_of_page">Number of Pages:</label>
             <input type="number" class="mb-3 form-control" name="num_of_page" id="num_of_page" min="10" max="1000">
-            <button type="submit" class="btn btn-outline-info mt-3">Create</button>
+            <button type="submit" class="btn btn-outline-warning mt-3">Create</button>
         </form>
     </div>
     <div class="card p-5 w-50 ms-3">
-        <h1 class="card-title">All Books</h1>
+        <h1 class="card-title mb-3">All Books</h1>
         {% for book in books %}
-        <p>{{book.title}}</p>
+        <p class="text-primary"><a href="/books/{{book.id}}">{{book.title}}</a></p>
         {%endfor%}
     </div>
 </div>
-    <p class="fs-5"><a href="/authors" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Home</a></p>
+    <p class="fs-5"><a href="/authors" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Home</a></p>
 </div>
 {%endblock%}

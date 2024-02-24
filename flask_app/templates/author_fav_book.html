@@ -1,0 +1,36 @@
+{%extends "layout.html"%}
+{%block body%}
+<div class="container m-3 d-flex justify-content-between">
+    <div class="ms-3 p-5 w-50">
+        <h1 >{{author.name}}'s Favorite books:</h1>
+            <table class="mt-4 table table-warning table-hover" >
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th># of pages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for book in author.books %}
+                    <tr>
+                        <td>{{book.title}}</td>
+                        <td>{{book.num_of_page}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+    </div>
+    <div class="ms-3 p-5 w-50">
+        <h1>Add Authors Favorite</h1>
+        <form action="/authors/add_fav/{{author.id}}" method="post">
+            <label for="title" class="fs-5 mb-3">Book</label> 
+            <select  class="form-select mb-3" name="title" id="title">
+                {%for book in books %}
+                <option value="{{ book.id }}">{{book.title}}</option>
+                {%endfor%}
+            </select>
+            <input type="submit" class="btn btn-outline-primary">
+        </form>
+    </div>
+</div>
+{%endblock%}

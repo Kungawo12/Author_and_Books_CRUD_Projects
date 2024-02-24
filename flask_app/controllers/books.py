@@ -14,3 +14,10 @@ def add_books():
     }
     Book.add_book(data)
     return redirect('/books')
+
+@app.route("/books/<int:id>")
+def author_fav(id):
+    data={
+        "id": id
+    }
+    return render_template("author_fav.html",book = Book.get_books_with_authors(data))
