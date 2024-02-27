@@ -21,16 +21,21 @@
             </table>
     </div>
     <div class="ms-3 p-5 w-50">
-        <h1>Add Authors Favorite</h1>
-        <form action="/authors/add_fav/{{author.id}}" method="post">
-            <label for="title" class="fs-5 mb-3">Book</label> 
-            <select  class="form-select mb-3" name="title" id="title">
-                {%for book in books %}
-                <option value="{{ book.id }}">{{book.title}}</option>
-                {%endfor%}
-            </select>
+        <form action="/authors/add_fav_authors" method="post">
+            <h1 class="text-info">Add Author's Favorite</h1>
+            <input type="hidden" name="author_id" value='{{author.id}}'>
+            <div class="form-group">
+                <label for="book_id"  class="fs-5 mb-3">Book</label> 
+                <select name="book_id" class="form-select mb-3" id="book_id">
+                    <option selected>Collection of Books</option>
+                    {%for book in unfavorited_books%}
+                    <option value="{{ book.id }}">{{book.title}}</option>
+                    {%endfor%}
+                </select>
+            </div>
             <input type="submit" class="btn btn-outline-primary">
         </form>
     </div>
 </div>
+<p class="m-5 ps-5"><a href="/authors" class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>Home</a></p>
 {%endblock%}

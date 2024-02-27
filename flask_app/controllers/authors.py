@@ -8,14 +8,14 @@ def index():
 
 @app.route('/authors')
 def authors():
-    return render_template("authors.html",authors =author.Author.get_author())
+    return render_template("authors.html",authors =author.Author.get_all())
 
-@app.route("/authors/add_author", methods=['POST'])
-def add_author():
+@app.route("/create/author", methods=['POST'])
+def create():
     data= {
         "name": request.form["name"]
     }
-    author.Author.add_author(data)
+    author.Author.save(data)
     return redirect('/authors')
 
 @app.route("/authors/delete/<int:id>")
@@ -31,11 +31,13 @@ def show_fav_books(id):
     data={
         "id": id
     }
-    return render_template("author_fav_book.html",author=author.Author.get_author_with_book(data),books = book.Book.get_book())
+    return render_template("author_fav_book.html",author=author.Author.get_author_with_book(data),unfavorited_books= book.Book.unfavorited_books(data))
 
-@app.route("/authors/add_fav/<int:id>")
-def add_fav(id):
-    data={
-        "id":id
+@app.route("/authors/add_fav_authors", methods=['POST'])
+def add_fav_authors():
+    data= {
+        'author_id': request.form['author_id'],
+        'book_id': request.form['book_id']
     }
-    return redirect('/authors')
+    author.Author.add_favorite(data)
+    return redirect(f'/authors/{request.form['author_id']}')
